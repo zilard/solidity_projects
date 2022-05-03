@@ -107,5 +107,19 @@ contract ZilFunding {
         return priceFeed.version();
     }
 
-}
+    // should return the latest price of Ethereum in terms of USD
+    function getPrice() public view returns(uint256) {
 
+        AggregatorV3Interface priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
+
+        // tuple used here
+        (,int256 answer,,,) = priceFeed.latestRoundData();
+
+        // typecasting used here
+        return uint256(answer);
+
+        // 1 ETH = 276506595448 => 2,765.06595448 USD
+
+    }
+ 
+}
