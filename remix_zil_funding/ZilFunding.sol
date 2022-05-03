@@ -18,46 +18,7 @@ pragma solidity ^0.8.7;
 
 // and you always need an ABI to interact with a Contract
 
-
-// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-
-
-
-
-interface AggregatorV3Interface {
-  function decimals() external view returns (uint8);
-
-  function description() external view returns (string memory);
-
-  function version() external view returns (uint256);
-
-  // getRoundData and latestRoundData should both raise "No data present"
-  // if they do not have data to report, instead of returning unset values
-  // which could be misinterpreted as actual reported values.
-  function getRoundData(uint80 _roundId)
-    external
-    view
-    returns (
-      uint80 roundId,
-      int256 answer,
-      uint256 startedAt,
-      uint256 updatedAt,
-      uint80 answeredInRound
-    );
-
-  function latestRoundData()
-    external
-    view
-    returns (
-      uint80 roundId,
-      int256 answer,
-      uint256 startedAt,
-      uint256 updatedAt,
-      uint80 answeredInRound
-    );
-}
-
-
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 
 contract ZilFunding {
@@ -116,10 +77,23 @@ contract ZilFunding {
         (,int256 answer,,,) = priceFeed.latestRoundData();
 
         // typecasting used here
-        return uint256(answer);
+        return uint256(answer * 10000000000);
 
         // 1 ETH = 276506595448 => 2,765.06595448 USD
+    }
 
+    // 1 Wei = 10**-9 Gwei
+    // 1 Wei = 10**-18 Eth
+
+    // 1 gwei = 10**10 = 10000000000 
+    // 2,779.8851063800000000000000000000
+
+
+     // 1000000000
+    function getConversionRate(uint256 ethAmount) public view returns (uint256) {
+        uint256 ethPrice = getPrice();
+        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;   // 10**18
+        return ethAmountInUsd;
     }
  
 }
