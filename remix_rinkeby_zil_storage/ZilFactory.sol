@@ -17,14 +17,12 @@ contract ZilFactory {
     function zfStore(uint256 _zilStorageIndex, uint256 _zilStorageNumber) public {
         // Address of the Contract
         // ABI
-        ZilStorage zilStorage = ZilStorage(address(zilStorageArray[_zilStorageIndex]));
-        zilStorage.store(_zilStorageNumber);
+        ZilStorage(address(zilStorageArray[_zilStorageIndex])).store(_zilStorageNumber);
 
     }
 
     function zfGet(uint256 _zilStorageIndex) public view returns(uint256) {
-        ZilStorage zilStorage = ZilStorage(address(zilStorageArray[_zilStorageIndex]));
-        return zilStorage.retrieve();
+        return ZilStorage(address(zilStorageArray[_zilStorageIndex])).retrieve();
     }
 
 }
