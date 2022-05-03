@@ -4,14 +4,14 @@ contract ZilStorage {
 
     // this will get initialized to 0!
     uint256 favoriteNumber;
-    bool favoritBool;
+    bool favoriteBool;
 
     struct People {
         uint256 favoriteNumber;
         string name;
     }
 
-    People[] public person;
+    People[] public people;
 
     function store(uint256 _favoriteNumber) public {
         favoriteNumber = _favoriteNumber;
@@ -22,7 +22,8 @@ contract ZilStorage {
     }
 
     function addPerson(string memory _name, uint256 _favoriteNumber) public {
-        people.push(People({favoriteNumber: _favoriteNumber, name: _name}));
+        people.push(People(_favoriteNumber, _name));
     }
 
 }
+
