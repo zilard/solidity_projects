@@ -1,0 +1,54 @@
+
+# The ABI is a json file that defines the interface
+# of the smart contract
+
+# description of all the functions that can be called from outside
+# of the smart contract
+# which include public function and additional function
+# for each function you have a description of the arguments if there are any
+# and you also have the return type for each function
+
+{
+  "abi": [
+    {
+      "constant": false,
+
+# for each function you have a description of the arguments if there are any
+
+      "inputs": [
+        {
+          "name": "_data",
+          "type": "string"
+        }
+      ],
+      "name": "set",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "publicGet",
+
+# and you also have the return type for each function
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+       ],
+      "payable": false,
+      "stateMutability": "view",
+
+# these json documents allow external libraries like web3 to interface
+# with our smart contract and understand how to interact with it
+
+# this json document is produced by the solidity compiler
+
+# this document must be imported into the frontend of your dapp
+# in order to configure web3
+    }
+  ]
+}
